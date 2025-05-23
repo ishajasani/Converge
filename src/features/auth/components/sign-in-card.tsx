@@ -7,6 +7,7 @@ import { FaGithub} from "react-icons/fa";
 import { SignInFlow } from "../types";
 import { useState } from "react";
 import { useAuthActions } from "@convex-dev/auth/react";
+import {TriangleAlert} from "lucide-react";
 
 interface SignInCardProps {
     setState: (state: SignInFlow) => void;
@@ -18,8 +19,22 @@ export const SignInCard = ({ setState } : SignInCardProps) => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [pending, setPending]  = useState(false);
+    const [error,setError] = useState("");
+    
+    const onPasswordSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-    const onProviderSignin = (value : "github" | "google") => {
+        setPending(true);
+        signIn("password" , {email,password , flow : "signIn"})
+        .catch(()=>{
+            setError("Invalid Email or Password");
+        })
+        .finally(()=>{
+            setPending(false);
+        })
+    }
+
+    const onProviderSignIn = (value : "github" | "google") => {
         setPending(true);
         signIn(value)
         .finally(()=>{
@@ -38,8 +53,16 @@ export const SignInCard = ({ setState } : SignInCardProps) => {
                 Use your email or another service to continue
             </CardDescription>
             </CardHeader>
+            {!!error && (
+                <div className="bg-red-500/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-red-500">
+                    <TriangleAlert className="size-4 text-red-500"/>
+                    <p>
+                        {error}
+                    </p>
+                </div>
+            )}
             <CardContent className="space-y-5 px-0 pb-0">
-                <form className="space-y-2.5">
+                <form onSubmit={onPasswordSignIn} className="space-y-2.5">
                     <Input
                     disabled={pending}
                     value={email}
@@ -64,7 +87,7 @@ export const SignInCard = ({ setState } : SignInCardProps) => {
                 <div className="flex flex-col gap-y-2.5">
                     <Button 
                     disabled={pending}
-                    onClick={()=> onProviderSignin("google")}
+                    onClick={()=> onProviderSignIn("google")}
                     variant="outline"
                     size="lg"
                     className="w-full relative"
@@ -74,7 +97,7 @@ export const SignInCard = ({ setState } : SignInCardProps) => {
                     </Button>
                     <Button 
                     disabled={pending}
-                    onClick={()=>onProviderSignin("github")}
+                    onClick={()=>onProviderSignIn("github")}
                     variant="outline"
                     size="lg"
                     className="w-full relative"
