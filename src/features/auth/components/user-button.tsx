@@ -37,7 +37,7 @@ if(!data){
             <DropdownMenuTrigger className="outline-none relative">
                 <Avatar className="size-10 hover:opacity-75 transition"> 
                     <AvatarImage alt={name} src={image}/>
-                    <AvatarFallback className="bg-purple-500/15">
+                    <AvatarFallback className="bg-accent/25 text-white">
                         {avatarFallback}
                     </AvatarFallback>
                 </Avatar>
