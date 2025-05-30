@@ -1,13 +1,17 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input";
 import { useRemoveWorkspace } from "@/features/workspaces/api/use-remove-workspace";
 import { useUpdateWorkspace } from "@/features/workspaces/api/use-update-workspace";
+import { DialogClose } from "@radix-ui/react-dialog";
 import { TrashIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -23,6 +27,7 @@ export const PreferencesModal = ({
     initialeValue
 } :    PreferencesModalProps) => {
     const [value , setValue] = useState(initialeValue);
+    const [editOpen , setEditOpen] = useState(false);
 
     const {mutate: updateWorkspace , isPending : isUpdatingWorkspace} = useUpdateWorkspace();
 
@@ -37,6 +42,8 @@ export const PreferencesModal = ({
                     </DialogTitle>
                 </DialogHeader>
                 <div className="px-4 pb-4 flex flex-col gap-y-2">
+                    <Dialog open={editOpen} onOpenChange={setEditOpen}>
+                        <DialogTrigger asChild>
                     <div className="px-5 py-4 bg-white rounded-lg border cursor-pointer hover:bg-gray-50">
                         <div className="flex items-center justify-between">
                             <p className="text-sm font-semibold">
@@ -50,6 +57,37 @@ export const PreferencesModal = ({
                             {value}
                         </p>
                     </div>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>
+                                    Rename This Workspace
+                                </DialogTitle>
+                            </DialogHeader>
+                            <form className="space-y-4" onSubmit={() => {}}>
+                            <Input 
+                            value={value}
+                            disabled={isUpdatingWorkspace}
+                            onChange={(e) => setValue(e.target.value)}
+                            required
+                            autoFocus
+                            minLength={3}
+                            maxLength={80}
+                            placeholder="Workspace name e.g. 'Work' , 'Personal'"
+                            />
+                            </form>
+                            <DialogFooter>
+                                <DialogClose asChild>
+                                    <Button variant="outline" disabled={isUpdatingWorkspace}>
+                                        Cancel
+                                    </Button>
+                                    <Button disabled={isUpdatingWorkspace}>
+                                        Save
+                                    </Button>
+                                </DialogClose>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                     <button
                     disabled={false}
                     onClick={()=>{}}
