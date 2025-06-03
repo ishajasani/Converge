@@ -1,6 +1,3 @@
-import { useCurrentMember } from "@/features/members/api/user-cuurent-member";
-import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import {
   AlertTriangle,
   HashIcon,
@@ -8,15 +5,21 @@ import {
   MessageSquareText,
   SendHorizonal,
 } from "lucide-react";
+import { useCurrentMember } from "@/features/members/api/user-cuurent-member";
+import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { WorkspaceHeader } from "./workspace-header";
 import { SidebarItem } from "./sidebar-item";
 import { useGetChannels } from "@/features/channels/api/use-get-channels";
 import { WorkspaceSection } from "./workspace-section";
 import { useGetMembers } from "@/features/members/api/user-get-member";
 import { UserItem } from "./user-item";
+import { useCreateChannelModal } from "@/features/channels/store/use-create-channel-modal";
 
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
+
+  const [_open , setOpen] = useCreateChannelModal();
 
   const { data: member, isLoading: memberLoading } = useCurrentMember({
     workspaceId,
@@ -61,7 +64,7 @@ export const WorkspaceSidebar = () => {
         <SidebarItem label="Threads" icon={MessageSquareText} id="threads" />
         <SidebarItem label="Drafts & Sent" icon={SendHorizonal} id="drafts" />
       </div>
-      <WorkspaceSection label="Channels" hint="New Channel" onNew={() => {}}>
+      <WorkspaceSection label="Channels" hint="New Channel" onNew={member.role === "admin" ? () => setOpen(true) : undefined}>
         {channels?.map((item) => (
           <SidebarItem
             key={item._id}
@@ -71,7 +74,11 @@ export const WorkspaceSidebar = () => {
           />
         ))}
       </WorkspaceSection>
-      <WorkspaceSection label="Direct Messages" hint="New direct message" onNew={() => {}}>
+      <WorkspaceSection 
+      label="Direct Messages" 
+      hint="New direct message" 
+      onNew={() => {}}
+      >
         {members?.map((item) => (
           <UserItem
             key={item._id}
