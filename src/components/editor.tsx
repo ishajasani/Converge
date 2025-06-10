@@ -1,3 +1,5 @@
+import Quill from "quill";
+
 const Editor = () => {
     return(
         <div className="flex flex-col">
