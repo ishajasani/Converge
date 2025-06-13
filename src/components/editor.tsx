@@ -8,7 +8,14 @@ import { Button } from "./ui/button";
 import { ImageIcon, Smile } from "lucide-react";
 import { Hint } from "./hint";
 
-const Editor = () => {
+interface EditorProps {
+  variant?: "create" | "update";
+};
+
+const Editor = ({
+  variant = "create"
+
+} : EditorProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -57,6 +64,7 @@ const Editor = () => {
               <Smile className="size-4" />
             </Button>
           </Hint>
+          {variant === "create" && (
           <Hint label="Image">
             <Button
               disabled={false}
@@ -67,6 +75,7 @@ const Editor = () => {
               <ImageIcon className="size-4" />
             </Button>
           </Hint>
+          )}
           <Button
             disabled={false}
             onClick={() => {}}
