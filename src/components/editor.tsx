@@ -76,6 +76,27 @@ const Editor = ({
             </Button>
           </Hint>
           )}
+          { variant === "update" && (
+            <div className="ml-auto flex items-center gap-x-2">
+              <Button 
+              variant="outline"
+              size="sm"
+              onClick={()=>{}}
+              disabled={false}
+              >
+                Cancel
+              </Button>
+              <Button
+              disabled={false}
+              onClick={()=>{}}
+              size="sm"
+              className="bg-[#007a5a] hover:bg-[#007a5a]/70 text-white"
+              >
+                Save
+              </Button>
+            </div>
+          )}
+          {variant === "create" && (
           <Button
             disabled={false}
             onClick={() => {}}
@@ -84,6 +105,7 @@ const Editor = ({
           >
             <MdSend className="size-4" />
           </Button>
+          )}
         </div>
       </div>
       <div className="p-2 text-[10px] text-muted-foreground flex justify-end">
