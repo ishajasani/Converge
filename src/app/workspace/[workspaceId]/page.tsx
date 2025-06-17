@@ -2,7 +2,7 @@
 
 import { useGetChannels } from "@/features/channels/api/use-get-channels";
 import { useCreateChannelModal } from "@/features/channels/store/use-create-channel-modal";
-import { useCurrentMember } from "@/features/members/api/user-cuurent-member";
+import { useCurrentMember } from "@/features/members/api/user-current-member";
 import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
