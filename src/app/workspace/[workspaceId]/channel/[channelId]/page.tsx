@@ -6,6 +6,7 @@ import { useGetMessages } from "@/features/messages/api/use-get-messages";
 import { Loader, TriangleAlert } from "lucide-react";
 import { Header } from "./header";
 import { ChatInput } from "./chat-input";
+import { MessageList } from "@/components/message-list";
 
 const ChannelIdPage = () => {
     const channelId = useChannelId();
