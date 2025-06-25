@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
+import { Loader } from "lucide-react";
 import {differenceInMinutes, format , isToday , isYesterday} from "date-fns";
+
+import { GetMessagesReturnType } from "@/features/messages/api/use-get-messages";
+import { useCurrentMember } from "@/features/members/api/user-current-member";
+import { useWorkspaceId } from "@/hooks/use-workspace-id";
+
+
 import { Message } from "./message";
 import { ChannelHero } from "./channel-hero";
+
 import { Id } from "../../convex/_generated/dataModel";
-import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { useCurrentMember } from "@/features/members/api/user-current-member";
-import { Loader } from "lucide-react";
 
 const TIME_THRESHOLD = 5;
 interface MessageListProps {
