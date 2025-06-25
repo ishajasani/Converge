@@ -5,7 +5,7 @@ import { differenceInMinutes, format, isToday, isYesterday } from "date-fns";
 import Quill from "quill";
 
 import { useGetMessage } from "../api/use-get-message";
-import { useCurrentMember } from "@/features/members/api/user-current-member";
+import { useCurrentMember } from "@/features/members/api/use-current-member";
 import { useCreateMessage } from "../api/use-create-message";
 import { useGenerateUploadUrl } from "@/features/upload/api/use-generate-upload-url";
 import { useGetMessages } from "../api/use-get-messages";

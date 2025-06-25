@@ -21,7 +21,7 @@ import { useChannelId } from "@/hooks/use-channel-id";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useRouter } from "next/navigation";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { useCurrentMember } from "@/features/members/api/user-current-member";
+import { useCurrentMember } from "@/features/members/api/use-current-member";
 
 interface HeaderProps {
   title: string;
