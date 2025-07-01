@@ -37,14 +37,14 @@ const WorkspaceIdLayoutProps = ({children} : WorkspaceIdLayoutProps) => {
                 autoSaveId="ij-workspace-layout"
                 >
                     <ResizablePanel 
-                    defaultSize={20}
-                    minSize={11}
+                    defaultSize={13}
+                    minSize={13}
                     className="bg-[#5E2C5F] "
                     >
                         <WorkspaceSidebar/>
                     </ResizablePanel>
                     <ResizableHandle withHandle/>
-                    <ResizablePanel minSize={20}>
+                    <ResizablePanel minSize={20} defaultSize={80}>
                     {children}
                     </ResizablePanel>
                     {showPanel && (
