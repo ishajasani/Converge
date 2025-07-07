@@ -78,7 +78,7 @@ export const ChatInput = ({placeholder , conversationId} : ChatInputProps) => {
             await createMessage(values, {throwError : true} );
 
             setEditorKey((prevKey) =>prevKey + 1);
-        } catch (error) {
+        } catch (_) {
             toast.error("Failed to send message");
         } finally {
             setIsPending(false);

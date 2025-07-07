@@ -144,9 +144,16 @@ const Editor = ({
   }
 
   const onEmojiSelect = (emojiValue : string) => {
-    const quill = quillRef.current;
+   const quill = quillRef.current;
+  if (!quill) return;
+  quill.focus();
+  setTimeout(() => {
+    const selection = quill.getSelection();
+    const index = selection?.index ?? quill.getLength();
 
-    quill?.insertText(quill?.getSelection()?.index || 0 , emojiValue);
+    quill.insertText(index, emojiValue, "user");
+    quill.setSelection(index + emojiValue.length, 0);
+  }, 0);
   };
 
   const isEmpty = !image && text.replace(/<(.|\n)*?>/g , "").trim().length === 0;

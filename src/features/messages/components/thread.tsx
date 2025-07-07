@@ -103,7 +103,7 @@ export const Thread = ({ messageId, onClose }: ThreadProps) => {
       await createMessage(values, { throwError: true });
 
       setEditorKey((prevKey) => prevKey + 1);
-    } catch (error) {
+    } catch (_) {
       toast.error("Failed to send message");
     } finally {
       setIsPending(false);
@@ -150,6 +150,7 @@ export const Thread = ({ messageId, onClose }: ThreadProps) => {
   }
 
   if (!message) {
+    return (
     <div className="h-full flex flex-col">
       <div className="flex justify-between items-center h-[49px] px-4 border-b">
         <p className="text-lg font-bold"> Thread </p>
@@ -163,7 +164,8 @@ export const Thread = ({ messageId, onClose }: ThreadProps) => {
           <p className="text-sm text-muted-foreground">Message not found</p>
         </div>
       </div>
-    </div>;
+    </div>
+    )
   }
 
   return (
@@ -246,8 +248,8 @@ export const Thread = ({ messageId, onClose }: ThreadProps) => {
         )}
         <Message
           hideThreadButton
-          id={message?._id!}
-          memberId={message?.memberId!}
+          id={message?._id}
+          memberId={message?.memberId}
           authorImage={message?.user.image}
           authorName={message?.user.name}
           isAuthor={message?.memberId === currentMember?._id}

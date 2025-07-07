@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useState } from "react";
 import { Info, Search } from "lucide-react";
 
@@ -10,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
